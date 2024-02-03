@@ -25,9 +25,9 @@ public class CurrencyBot extends TelegramLongPollingBot {
             case "Альфа банк":
                 return Arrays.asList("Курс на текущий день", "Выбрать другой банк", "Выбрать другую валюту");
             case "Беларусбанк":
-                return Arrays.asList("Курс на текущий день", "Курс на выбранный день", "Собрать статистику", "Выбрать другой банк", "Выбрать другую валюту");
+                return Arrays.asList("Курс на текущий день", "Выбрать другой банк", "Выбрать другую валюту");
             default:
-                return Arrays.asList(); // Пустой список для неизвестного банка
+                return Arrays.asList();
         }
     }
     private Map<Long, UserSelections> userSelectionsMap = new HashMap<>();
