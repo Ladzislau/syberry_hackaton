@@ -2,6 +2,8 @@ package com.team.syberry.controller;
 
 import com.team.syberry.service.EBank;
 import com.team.syberry.service.api.IBankService;
+
+import com.team.syberry.service.BankInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +20,14 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BankController {
 
+
+    private final BankInfoService bankInfoService;
+
     private final Map<String, IBankService> bankServiceMap;
 
     @GetMapping
     public ResponseEntity<?> getBanks(){
-        List<String> banks = Arrays.stream(EBank.values())
-                    .map(EBank::getValue)
-                    .toList();
-
+        List<String> banks = bankInfoService.getAllBanks();
         return ResponseEntity.ok(banks);
     }
 

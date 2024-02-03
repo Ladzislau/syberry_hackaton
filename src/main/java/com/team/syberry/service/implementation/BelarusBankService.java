@@ -3,8 +3,10 @@ package com.team.syberry.service.implementation;
 import com.team.syberry.domain.belarusbank.EBelarusbankCurrency;
 import com.team.syberry.domain.belarusbank.RateBelarusBank;
 import com.team.syberry.dto.response.RateDto;
+import com.team.syberry.dto.response.RateInfoDto;
 import com.team.syberry.dto.response.StatisticsInfo;
 import com.team.syberry.feign.IBelarusBankApiClient;
+import com.team.syberry.service.BelarusbankMapper;
 import com.team.syberry.service.api.IBankService;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,11 @@ import java.util.List;
 @Service("belarusbankService")
 public class BelarusBankService implements IBankService {
     private IBelarusBankApiClient bankApiClient;
+    private BelarusbankMapper mapper;
 
-    public BelarusBankService(IBelarusBankApiClient bankApiClient) {
+    public BelarusBankService(IBelarusBankApiClient bankApiClient, BelarusbankMapper mapper) {
         this.bankApiClient = bankApiClient;
+        this.mapper = mapper;
     }
 
     @Override
@@ -32,9 +36,18 @@ public class BelarusBankService implements IBankService {
     @Override
     public RateDto getCurrencyRateToday(String currencyCode) {
         RateBelarusBank rate = bankApiClient.getCurrenciesList().get(0);
-        RateDto dto = new RateDto();
-        dto.setDate(LocalDateTime.now());
-        dto.setSellRate(rate.);
+        List<RateInfoDto> list = mapper.processCurrencyExchangeRates(rate);
+        for(RateInfoDto infoDto : list) {
+            if( infoDto.getCurName().equals(currencyCode)) {
+                RateDto dto = new RateDto();
+                dto.setDate(LocalDateTime.now());
+                dto.setSellRate(infoDto.getSellRate());
+                dto.setBuyRate(infoDto.getBuyRate());
+
+                return dto;
+            }
+        }
+
         return null;
     }
 
