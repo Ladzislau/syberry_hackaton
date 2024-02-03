@@ -4,8 +4,10 @@ package com.team.syberry.controller;
 import com.team.syberry.dto.response.RateDto;
 import com.team.syberry.service.api.IBankService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +15,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-@RestController(value = "/rate")
+@RestController
+@RequestMapping("/rate")
 @RequiredArgsConstructor
 public class RateController {
 
@@ -22,10 +25,10 @@ public class RateController {
     @GetMapping()
     public ResponseEntity<?> getCurrencyRate(@RequestParam("bank") String bank,
                                              @RequestParam("currencyCode") String currencyCode,
-                                             @RequestParam("date") LocalDate date){
+                                             @RequestParam("date") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date){
         IBankService bankService = bankServiceMap.get(bank);
 
-        RateDto currencyRate = bankService.getCurrencyRateForPeriod(currencyCode, date, date).get(0);
+        RateDto currencyRate = bankService.getCurrencyRateForDate(currencyCode, date);
         return ResponseEntity.ok(currencyRate);
     }
 

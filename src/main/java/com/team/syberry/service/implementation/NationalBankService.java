@@ -40,7 +40,8 @@ public class NationalBankService implements IBankService {
 
     @Override
     public RateDto getCurrencyRateToday(String currencyCode) {
-        return getCurrencyRateToday(currencyCode);
+//        return bankApiClient.getCurrencyRateForPeriod(currencyCode, LocalDate.now(), LocalDate);
+        return null;
     }
 
     @Override

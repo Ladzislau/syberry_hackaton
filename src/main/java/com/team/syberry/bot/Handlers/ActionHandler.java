@@ -41,11 +41,12 @@ public class ActionHandler {
 
         switch (message.getText()) {
             case "Курс на текущий день":
+                String request = rateUrl
+                        + "?bank=" + bankServiceName
+                        + "&currencyCode=" + selectedCurrency
+                        + "&date=" + LocalDate.now().format(formatter);
                 RateDto currentDayRate = restTemplate.getForEntity(
-                        rateUrl
-                                + "?bank=" + bankServiceName
-                                + "&currencyCode" + selectedCurrency
-                                + "date=" + LocalDate.now().format(formatter),
+                        request,
                         RateDto.class).getBody();
                 String sellRateCurDay = String.valueOf(currentDayRate.getSellRate());
                 actionMessage.setText("Курс на текущий день:\n" + sellRateCurDay);
@@ -55,8 +56,8 @@ public class ActionHandler {
                 RateDto selectedDayRate = restTemplate.getForEntity(
                         rateUrl
                                 + "?bank=" + bankServiceName
-                                + "&currencyCode" + selectedCurrency
-                                + "date=02-02-2024",
+                                + "&currencyCode=" + selectedCurrency
+                                + "&date=02-02-2024",
                         RateDto.class).getBody();
                 String sellRateSelectedDay = String.valueOf(selectedDayRate.getSellRate());
                 actionMessage.setText("Курс на текущий день:\n" + sellRateSelectedDay);
