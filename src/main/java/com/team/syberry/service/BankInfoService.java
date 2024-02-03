@@ -1,6 +1,5 @@
-package com.team.syberry.service.implementation;
+package com.team.syberry.service;
 
-import com.team.syberry.service.EBank;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -8,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MainBankService {
+public class BankInfoService {
 
     public List<String> getAllBanks() {
         return Arrays.stream(EBank.values())

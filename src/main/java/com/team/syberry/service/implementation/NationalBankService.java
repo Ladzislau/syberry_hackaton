@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service("nationalBankService")
-
 public class NationalBankService implements IBankService {
 
     @Override
