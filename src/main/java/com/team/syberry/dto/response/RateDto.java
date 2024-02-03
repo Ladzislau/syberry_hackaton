@@ -4,7 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class RateInfo {
+public class RateDto {
 
     private double sellRate;
 
