@@ -1,8 +1,6 @@
 package com.team.syberry.feign;
 
-import com.team.syberry.domain.nationalbank.CurrencyNationalBank;
-import com.team.syberry.domain.nationalbank.RateNationalBank;
-import com.team.syberry.domain.nationalbank.RateShortNationalBank;
+import com.team.syberry.domain.nationalbank.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,7 @@ public interface INationalBankApiClient {
     @GetMapping("/exrates/rates/{cur_id}")
     RateNationalBank getCurrencyRate(@PathVariable(name = "cur_id") String currencyCode,
                                             @RequestParam(name = "ondate", required = false) LocalDate date,
-                                            @RequestParam(name = "periodicity") Integer periodicity,
+                                            @RequestParam(name = "periodicity", defaultValue = "0") Integer periodicity,
                                             @RequestParam(name = "parammode", defaultValue = "0") String paramMode);
 
     @GetMapping("/exrates/rates/dynamics/{cur_id}")

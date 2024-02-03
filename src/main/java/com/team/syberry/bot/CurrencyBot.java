@@ -1,6 +1,6 @@
 package com.team.syberry.bot;
 
-import com.team.syberry.Handlers.*;
+import com.team.syberry.bot.Handlers.*;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CurrencyBot extends TelegramLongPollingBot {
@@ -17,6 +18,18 @@ public class CurrencyBot extends TelegramLongPollingBot {
     public static final String[] BANKS = {"Национальный банк", "Альфа банк", "Беларусбанк"};
     public static final String[] ACTIONS = {"Курс на текущий день", "Курс на выбранный день", "Собрать статистику", "Выбрать другой банк", "Выбрать другую валюту"};
 
+    public List<String> getBankButtons(String bank) {
+        switch (bank) {
+            case "Национальный банк":
+                return Arrays.asList("Курс на текущий день", "Курс на выбранный день", "Собрать статистику", "Выбрать другой банк", "Выбрать другую валюту");
+            case "Альфа банк":
+                return Arrays.asList("Курс на текущий день", "Выбрать другой банк", "Выбрать другую валюту");
+            case "Беларусбанк":
+                return Arrays.asList("Курс на текущий день", "Выбрать другой банк", "Выбрать другую валюту");
+            default:
+                return Arrays.asList();
+        }
+    }
     private Map<Long, UserSelections> userSelectionsMap = new HashMap<>();
 
     @Override
@@ -41,14 +54,14 @@ public class CurrencyBot extends TelegramLongPollingBot {
                     userSelections.setSelectedCurrency(inMessage.getText());
                     new CurrencyConfirmationHandler().handle(this, inMessage, inMessage.getText(), userSelections.getSelectedBank());
                 } else {
-                    ErrorHandler.sendError(this, inMessage, "что-то пошло не так.");
+                    ErrorHandler.sendError(this, inMessage, "что-то пошло не так. Нажми /start.");
                 }
             } else if (Arrays.asList(ACTIONS).contains(inMessage.getText())) {
                 UserSelections userSelections = userSelectionsMap.get(chatId);
                 new ActionHandler().handle(this, inMessage, userSelections.getSelectedBank(), userSelections.getSelectedCurrency());
 
             } else {
-                ErrorHandler.sendError(this, inMessage, "что-то пошло не так.");
+                ErrorHandler.sendError(this, inMessage, "что-то пошло не так. Нажми /start.");
             }
         } catch (TelegramApiException e) {
             e.printStackTrace();
