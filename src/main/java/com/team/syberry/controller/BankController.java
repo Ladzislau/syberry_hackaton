@@ -1,30 +1,36 @@
 package com.team.syberry.controller;
 
 import com.team.syberry.service.api.IBankService;
-import org.springframework.http.HttpStatus;
+import com.team.syberry.service.implementation.MainBankService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/api/banks")
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/banks")
+@RequiredArgsConstructor
 public class BankController {
 
-    private final IBankService bankService;
-
-    public BankController(IBankService bankService) {
-        this.bankService = bankService;
-    }
+    private final MainBankService mainBankService;
+    private final Map<String, IBankService> bankServiceMap;
 
     @GetMapping
     public ResponseEntity<?> getBanks(){
-        return new ResponseEntity<>(bankService.getAllBanks(), HttpStatus.OK);
+        List<String> banks = mainBankService.getAllBanks();
+        return ResponseEntity.ok(banks);
     }
 
     @GetMapping(value = "/{bankName}/currencies")
-    public ResponseEntity<?> getCurrencies(@PathVariable String bankName){
-        return new ResponseEntity<>(bankService.getAllCurrencies(bankName), HttpStatus.OK);
+    public ResponseEntity<?> getCurrencies(@PathVariable("bankName") String bankName) {
+        IBankService bankService = bankServiceMap.get(bankName);
+        List<String> currencies = bankService.getAllCurrencies(bankName);
+        return ResponseEntity.ok(currencies);
     }
-
 
 }

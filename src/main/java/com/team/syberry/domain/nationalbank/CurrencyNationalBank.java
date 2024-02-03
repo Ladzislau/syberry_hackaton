@@ -1,11 +1,11 @@
-package com.team.syberry.domain;
+package com.team.syberry.domain.nationalbank;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class RateNationalBank {
+public class CurrencyNationalBank {
     private int Cur_ID;
     private int Cur_ParentID;
     private String Cur_Code;
