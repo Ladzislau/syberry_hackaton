@@ -1,6 +1,6 @@
 package com.team.syberry.bot.Handlers;
 
-import com.team.syberry.CurrencyBot;
+import com.team.syberry.bot.CurrencyBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
