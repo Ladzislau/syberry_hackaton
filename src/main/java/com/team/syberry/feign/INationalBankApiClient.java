@@ -16,15 +16,11 @@ public interface INationalBankApiClient {
 
     @GetMapping("/exrates/rates/{cur_id}")
     public CurrencyRateDto getCurrencyRate(@PathVariable String currencyCode,
-                                           @RequestParam LocalDate date);
+                                           @RequestParam LocalDate ondate);
 
     @GetMapping("/exrates/rates/dynamics/{cur_id}")
     public List<CurrencyRateDto> getCurrencyRateForPeriod(@PathVariable String currencyCode,
-                                                          @RequestParam LocalDate from,
-                                                          @RequestParam  LocalDate to);
+                                                          @RequestParam LocalDate startdate,
+                                                          @RequestParam  LocalDate enddate);
 
-    @GetMapping("/exrates/rates/{cur_id}")
-    public StatisticsDto getStatistics(@PathVariable String currencyCode,
-                                       @RequestParam LocalDate from,
-                                       @RequestParam LocalDate to);
 }
