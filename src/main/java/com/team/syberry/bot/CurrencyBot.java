@@ -20,10 +20,6 @@ public class CurrencyBot extends TelegramLongPollingBot {
     public static final String[] BANKS = {"Национальный банк", "Альфа банк", "Беларусбанк"};
     public static final String[] ACTIONS = {"Курс на текущий день", "Курс на выбранный день", "Собрать статистику", "Выбрать другой банк", "Выбрать другую валюту"};
 
-    public CurrencyBot() {
-        super("6937428906:AAFVcFNj9iMVo10hiaOvFDo5_gFk1HrV4bA");
-    }
-
     public List<String> getBankButtons(String bank) {
         switch (bank) {
             case "Национальный банк":
@@ -38,6 +34,10 @@ public class CurrencyBot extends TelegramLongPollingBot {
     }
     private Map<Long, UserSelections> userSelectionsMap = new HashMap<>();
 
+    @Override
+    public String getBotToken() {
+        return "6937428906:AAFVcFNj9iMVo10hiaOvFDo5_gFk1HrV4bA";
+    }
 
     @Override
     public void onUpdateReceived(Update update) {

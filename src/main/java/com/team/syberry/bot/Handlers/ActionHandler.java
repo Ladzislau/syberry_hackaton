@@ -27,7 +27,7 @@ public class ActionHandler {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         RestTemplate restTemplate = new RestTemplate();
-        String rateUrl = "http://localhost:8080/api/rate";
+        String rateUrl = "http://localhost:8080/rate";
         String bankUrl = "http://localhost:8080/api/banks";
 
         SendMessage actionMessage = new SendMessage();
