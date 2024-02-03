@@ -1,6 +1,7 @@
 package com.team.syberry.service.api;
 
 import com.team.syberry.dto.response.RateDto;
+import com.team.syberry.service.EBank;
 
 import java.time.LocalDate;
 import java.util.Arrays;

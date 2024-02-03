@@ -63,7 +63,7 @@ public class BelarusBankService implements IBankService {
     }
 
     @Override
-    public StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to) {
+    public byte[] getStatistics(String currencyCode, LocalDate from, LocalDate to) {
         return null;
     }
 }

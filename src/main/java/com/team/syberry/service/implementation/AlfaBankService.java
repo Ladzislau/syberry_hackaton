@@ -6,6 +6,9 @@ import com.team.syberry.dto.response.RateDto;
 import com.team.syberry.dto.response.StatisticsInfo;
 import com.team.syberry.feign.IAlfaBankApiClient;
 import com.team.syberry.service.api.IBankService;
+import jakarta.inject.Qualifier;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,13 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("alfaBankService")
+@RequiredArgsConstructor
 public class AlfaBankService implements IBankService {
 
-    private IAlfaBankApiClient bankApiClient;
+    private final IAlfaBankApiClient bankApiClient;
 
-    public AlfaBankService(IAlfaBankApiClient bankApiClient) {
-        this.bankApiClient = bankApiClient;
-    }
 
     @Override
     public List<String> getAllCurrencies() {
@@ -54,7 +55,7 @@ public class AlfaBankService implements IBankService {
     }
 
     @Override
-    public StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to) {
+    public byte[] getStatistics(String currencyCode, LocalDate from, LocalDate to) {
         return null;
     }
 }
