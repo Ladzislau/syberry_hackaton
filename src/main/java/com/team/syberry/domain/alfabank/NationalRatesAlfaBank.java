@@ -1,6 +1,8 @@
 package com.team.syberry.domain.alfabank;
 
 import lombok.Data;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -13,7 +15,7 @@ public class NationalRatesAlfaBank {
         private String iso;
         private int code;
         private int quantity;
-        private String date;
+        private LocalDateTime date;
         private String name;
     }
 }
