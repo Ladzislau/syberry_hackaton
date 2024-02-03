@@ -1,4 +1,4 @@
-package com.team.syberry.domain;
+package com.team.syberry.domain.belarusbank;
 
 import lombok.Data;
 
