@@ -1,6 +1,7 @@
 package com.team.syberry.bot.Handlers;
 
 import com.team.syberry.bot.CurrencyBot;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -10,6 +11,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CurrencyConfirmationHandler {
     public void handle(CurrencyBot bot, Message message, String selectedCurrency, String selectedBank) throws TelegramApiException {
         SendMessage currencyConfirmationMessage = new SendMessage();

@@ -16,40 +16,40 @@ import java.util.Map;
 @RestController(value = "/rate")
 @RequiredArgsConstructor
 public class RateController {
-
-    private final Map<String, IBankService> bankServiceMap;
-
-    @GetMapping()
-    public ResponseEntity<?> getCurrencyRate(@RequestParam("bank") String bank,
-                                             @RequestParam("currencyCode") String currencyCode,
-                                             @RequestParam("date") LocalDate date){
-        IBankService bankService = bankServiceMap.get(bank);
-
-        RateDto currencyRate = bankService.getCurrencyRateForPeriod(currencyCode, date, date).get(0);
-        return ResponseEntity.ok(currencyRate);
-    }
-
-    @GetMapping("/rates")
-    public ResponseEntity<?> getCurrencyRates(@RequestParam("bank") String bank,
-                                             @RequestParam("currencyCode") String currencyCode,
-                                             @RequestParam("from") LocalDate from,
-                                              @RequestParam("to") LocalDate to){
-        IBankService bankService = bankServiceMap.get(bank);
-
-        List<RateDto> currencyRates = bankService.getCurrencyRateForPeriod(currencyCode, from, to);
-        return ResponseEntity.ok(currencyRates);
-    }
-
-    @GetMapping("/statistics")
-    public ResponseEntity<?> getStatistics(@RequestParam("bank") String bank,
-                                           @RequestParam("currencyCode") String currencyCode,
-                                           @RequestParam("from") LocalDate from,
-                                           @RequestParam("to") LocalDate to){
-        IBankService bankService = bankServiceMap.get(bank);
-
-        byte[] statisticsInfo = bankService.getStatistics(currencyCode, from, to);
-        return ResponseEntity.ok(statisticsInfo);
-    }
+//
+//    public final Map<String, IBankService> bankServiceMap;
+//
+//    @GetMapping()
+//    public ResponseEntity<?> getCurrencyRate(@RequestParam("bank") String bank,
+//                                             @RequestParam("currencyCode") String currencyCode,
+//                                             @RequestParam("date") LocalDate date){
+//        IBankService bankService = bankServiceMap.get(bank);
+//
+//        RateDto currencyRate = bankService.getCurrencyRateForPeriod(currencyCode, date, date).get(0);
+//        return ResponseEntity.ok(currencyRate);
+//    }
+//
+//    @GetMapping("/rates")
+//    public ResponseEntity<?> getCurrencyRates(@RequestParam("bank") String bank,
+//                                             @RequestParam("currencyCode") String currencyCode,
+//                                             @RequestParam("from") LocalDate from,
+//                                              @RequestParam("to") LocalDate to){
+//        IBankService bankService = bankServiceMap.get(bank);
+//
+//        List<RateDto> currencyRates = bankService.getCurrencyRateForPeriod(currencyCode, from, to);
+//        return ResponseEntity.ok(currencyRates);
+//    }
+//
+//    @GetMapping("/statistics")
+//    public ResponseEntity<?> getStatistics(@RequestParam("bank") String bank,
+//                                           @RequestParam("currencyCode") String currencyCode,
+//                                           @RequestParam("from") LocalDate from,
+//                                           @RequestParam("to") LocalDate to){
+//        IBankService bankService = bankServiceMap.get(bank);
+//
+//        byte[] statisticsInfo = bankService.getStatistics(currencyCode, from, to);
+//        return ResponseEntity.ok(statisticsInfo);
+//    }
 
 
 }

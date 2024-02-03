@@ -2,6 +2,7 @@ package com.team.syberry.bot.Handlers;
 
 import com.team.syberry.bot.CurrencyBot;
 import com.team.syberry.dto.response.RateDto;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -13,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class ActionHandler {
 
     public void handle(CurrencyBot bot, Message message, String selectedBank, String selectedCurrency) throws TelegramApiException {
