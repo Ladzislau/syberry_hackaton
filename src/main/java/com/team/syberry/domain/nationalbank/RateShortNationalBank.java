@@ -1,6 +1,5 @@
 package com.team.syberry.domain.nationalbank;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;

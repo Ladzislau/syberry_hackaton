@@ -1,8 +1,6 @@
 package com.team.syberry.service.api;
 
 import com.team.syberry.dto.response.RateDto;
-import com.team.syberry.dto.response.StatisticsInfo;
-import com.team.syberry.service.EBank;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -25,5 +23,5 @@ public interface IBankService {
 
    List<RateDto> getCurrencyRateForPeriod(String currencyCode, LocalDate from, LocalDate to);
 
-   StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to);
+   byte[] getStatistics(String currencyCode, LocalDate from, LocalDate to);
 }
