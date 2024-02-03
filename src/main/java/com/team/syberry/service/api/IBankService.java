@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface IBankService {
 
-   List<String> getAllCurrencies(String backName);
+   List<String> getAllCurrencies();
+
+   RateDto getCurrencyRateForDate(String currencyCode, LocalDate date);
 
    List<RateDto> getCurrencyRateForPeriod(String currencyCode, LocalDate from, LocalDate to);
 

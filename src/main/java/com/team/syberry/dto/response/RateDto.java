@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 @Data
 public class RateDto {
 
-    private double sellRate;
+    private Double sellRate;
 
-    private double buyRate;
+    private Double buyRate;
 
     private LocalDateTime date;
 

@@ -12,7 +12,7 @@ import java.util.List;
 public class AlfaBankService implements IBankService {
 
     @Override
-    public List<String> getAllCurrencies(String backName) {
+    public List<String> getAllCurrencies() {
         return null;
     }
 

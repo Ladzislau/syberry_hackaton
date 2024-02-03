@@ -1,8 +1,9 @@
 package com.team.syberry.feign;
 
-import com.team.syberry.domain.nationalbank.CurrencyNationalBank;
-import com.team.syberry.domain.nationalbank.RateNationalBank;
-import com.team.syberry.domain.nationalbank.RateShortNationalBank;
+
+import com.team.syberry.domain.CurRateNatBank;
+import com.team.syberry.domain.CurRateShortNatBank;
+import com.team.syberry.domain.CurrencyNatBank;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

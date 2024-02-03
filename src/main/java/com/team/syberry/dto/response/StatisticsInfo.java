@@ -6,13 +6,13 @@ import lombok.Data;
 public class StatisticsInfo {
     private String chartImage;
 
-    private double minRate;
+    private Double minRate;
 
-    private double maxRate;
+    private Double maxRate;
 
-    private double rateAtPeriodStart;
+    private Double rateAtPeriodStart;
 
-    private double rateAtPeriodEnd;
+    private Double rateAtPeriodEnd;
 
-    private double averageRate;
+    private Double averageRate;
 }
