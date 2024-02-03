@@ -1,18 +1,56 @@
 package com.team.syberry.controller;
 
-import org.springframework.http.HttpStatus;
+
+import com.team.syberry.dto.response.RateDto;
+import com.team.syberry.dto.response.StatisticsInfo;
+import com.team.syberry.service.api.IBankService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @RestController(value = "/rate")
+@RequiredArgsConstructor
 public class RateController {
-    private IRateService rateService
 
-    @GetMapping
-    public ResponseEntity<?> getCurrencyRate(String bankName, String currencyCode, LocalDate date){
-        return new ResponseEntity<>(, HttpStatus.OK);
+    private final Map<String, IBankService> bankServiceMap;
+
+    @GetMapping()
+    public ResponseEntity<?> getCurrencyRate(@RequestParam("bank") String bank,
+                                             @RequestParam("currencyCode") String currencyCode,
+                                             @RequestParam("date") LocalDate date){
+        IBankService bankService = bankServiceMap.get(bank);
+
+        RateDto currencyRate = bankService.getCurrencyRateForPeriod(currencyCode, date, date).get(0);
+        return ResponseEntity.ok(currencyRate);
     }
+
+    @GetMapping("/rates")
+    public ResponseEntity<?> getCurrencyRates(@RequestParam("bank") String bank,
+                                             @RequestParam("currencyCode") String currencyCode,
+                                             @RequestParam("from") LocalDate from,
+                                              @RequestParam("to") LocalDate to){
+        IBankService bankService = bankServiceMap.get(bank);
+
+        List<RateDto> currencyRates = bankService.getCurrencyRateForPeriod(currencyCode, from, to);
+        return ResponseEntity.ok(currencyRates);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<?> getStatistics(@RequestParam("bank") String bank,
+                                           @RequestParam("currencyCode") String currencyCode,
+                                           @RequestParam("from") LocalDate from,
+                                           @RequestParam("to") LocalDate to){
+        IBankService bankService = bankServiceMap.get(bank);
+
+        StatisticsInfo statisticsInfo = bankService.getStatistics(currencyCode, from, to);
+        return ResponseEntity.ok(statisticsInfo);
+    }
+
+
 }

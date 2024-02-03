@@ -1,5 +1,6 @@
 package com.team.syberry.feign;
 
+
 import com.team.syberry.domain.CurRateNatBank;
 import com.team.syberry.domain.CurRateShortNatBank;
 import com.team.syberry.domain.CurrencyNatBank;
@@ -15,15 +16,16 @@ import java.util.List;
 public interface INationalBankApiClient {
 
     @GetMapping("/exrates/currencies")
-    List<CurrencyNatBank> getCurrenciesList();
+    List<CurrencyNationalBank> getCurrenciesList();
 
     @GetMapping("/exrates/rates/{cur_id}")
-    public CurRateNatBank getCurrencyRate(@PathVariable String currencyCode,
-                                          @RequestParam LocalDate ondate);
+    RateNationalBank getCurrencyRate(@PathVariable(name = "cur_id") String currencyCode,
+                                            @RequestParam(name = "ondate", required = false) LocalDate date,
+                                            @RequestParam(name = "periodicity") Integer periodicity,
+                                            @RequestParam(name = "parammode", defaultValue = "0") String paramMode);
 
     @GetMapping("/exrates/rates/dynamics/{cur_id}")
-    public List<CurRateShortNatBank> getCurrencyRateForPeriod(@PathVariable String currencyCode,
-                                                              @RequestParam LocalDate startDate,
-                                                              @RequestParam  LocalDate endDate);
-
+    List<RateShortNationalBank> getCurrencyRateForPeriod(@PathVariable(name = "cur_id") String currencyCode,
+                                                                @RequestParam(name = "startdate", required = false) LocalDate from,
+                                                                @RequestParam(name = "enddate", required = false) LocalDate to);
 }
