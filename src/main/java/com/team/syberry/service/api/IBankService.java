@@ -17,9 +17,11 @@ public interface IBankService {
               .collect(Collectors.toList());
    }
 
-   List<String> getAllCurrencies(String backName);
+   List<String> getAllCurrencies();
 
-   List<RateDto> getCurrencyRateForPeriod(String bankName, String currencyCode, LocalDate from, LocalDate to);
+   RateDto getCurrencyRateForDate(String currencyCode, LocalDate date);
 
-   StatisticsInfo getStatistics(String bankName, String currencyCode, LocalDate from, LocalDate to);
+   List<RateDto> getCurrencyRateForPeriod(String currencyCode, LocalDate from, LocalDate to);
+
+   StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to);
 }

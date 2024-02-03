@@ -23,7 +23,7 @@ public class BankController {
 
     @GetMapping(value = "/{bankName}/currencies")
     public ResponseEntity<?> getCurrencies(@PathVariable String bankName){
-        return new ResponseEntity<>(bankService.getAllCurrencies(bankName), HttpStatus.OK);
+        return new ResponseEntity<>(bankService.getAllCurrencies(), HttpStatus.OK);
     }
 
 

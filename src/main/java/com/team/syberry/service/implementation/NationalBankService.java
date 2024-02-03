@@ -1,29 +1,68 @@
 package com.team.syberry.service.implementation;
 
+import com.team.syberry.domain.CurRateNatBank;
+import com.team.syberry.domain.CurRateShortNatBank;
+import com.team.syberry.domain.CurrencyNatBank;
+import com.team.syberry.domain.RateNationalBank;
 import com.team.syberry.dto.response.RateDto;
 import com.team.syberry.dto.response.StatisticsInfo;
+import com.team.syberry.feign.INationalBankApiClient;
 import com.team.syberry.service.api.IBankService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("nationalBankService")
 
 public class NationalBankService implements IBankService {
+    private INationalBankApiClient bankApiClient;
 
-    @Override
-    public List<String> getAllCurrencies(String backName) {
-        return null;
+    public NationalBankService(INationalBankApiClient bankApiClient) {
+        this.bankApiClient = bankApiClient;
     }
 
     @Override
-    public List<RateDto> getCurrencyRateForPeriod(String bankName, String currencyCode, LocalDate from, LocalDate to) {
-        return null;
+    public List<String> getAllCurrencies() {
+        List<CurrencyNatBank> currencyNatBankList = bankApiClient.getCurrenciesList();
+        List<String> resultList = new ArrayList<>();
+        for(CurrencyNatBank currency : currencyNatBankList) {
+           resultList.add(currency.getCur_Abbreviation());
+        }
+        return resultList;
     }
 
     @Override
-    public StatisticsInfo getStatistics(String bankName, String currencyCode, LocalDate from, LocalDate to) {
+    public RateDto getCurrencyRateForDate(String currencyCode, LocalDate date) {
+        CurRateNatBank rateNationalBank = bankApiClient.getCurrencyRate(currencyCode, date);
+        RateDto dto = new RateDto();
+        dto.setDate(LocalDateTime.of(date, LocalTime.now()));
+        dto.setBuyRate(rateNationalBank.getCur_OfficialRate());
+        dto.setSellRate(null);
+        return dto;
+    }
+
+    @Override
+    public List<RateDto> getCurrencyRateForPeriod(String currencyCode, LocalDate from, LocalDate to) {
+        List<RateDto> resultList = new ArrayList<>();
+
+        List<CurRateShortNatBank> rateNationalBank = bankApiClient.getCurrencyRateForPeriod(currencyCode, from, to);
+        for(CurRateShortNatBank rateShort : rateNationalBank) {
+            RateDto dto = new RateDto();
+            dto.setDate(rateShort.getDate());
+            dto.setBuyRate(rateShort.getCur_OfficialRate());
+            dto.setSellRate(null);
+
+            resultList.add(dto);
+        }
+        return resultList;
+    }
+
+    @Override
+    public StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to) {
         return null;
     }
 }

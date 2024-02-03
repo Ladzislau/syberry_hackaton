@@ -1,5 +1,8 @@
 package com.team.syberry.feign;
 
+import com.team.syberry.domain.CurRateNatBank;
+import com.team.syberry.domain.CurRateShortNatBank;
+import com.team.syberry.domain.CurrencyNatBank;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,15 +15,15 @@ import java.util.List;
 public interface INationalBankApiClient {
 
     @GetMapping("/exrates/currencies")
-    List<CurrencyDto> getCurrenciesList();
+    List<CurrencyNatBank> getCurrenciesList();
 
     @GetMapping("/exrates/rates/{cur_id}")
-    public CurrencyRateDto getCurrencyRate(@PathVariable String currencyCode,
-                                           @RequestParam LocalDate ondate);
+    public CurRateNatBank getCurrencyRate(@PathVariable String currencyCode,
+                                          @RequestParam LocalDate ondate);
 
     @GetMapping("/exrates/rates/dynamics/{cur_id}")
-    public List<CurrencyRateDto> getCurrencyRateForPeriod(@PathVariable String currencyCode,
-                                                          @RequestParam LocalDate startdate,
-                                                          @RequestParam  LocalDate enddate);
+    public List<CurRateShortNatBank> getCurrencyRateForPeriod(@PathVariable String currencyCode,
+                                                              @RequestParam LocalDate startDate,
+                                                              @RequestParam  LocalDate endDate);
 
 }

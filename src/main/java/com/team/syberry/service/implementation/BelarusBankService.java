@@ -12,17 +12,17 @@ import java.util.List;
 public class BelarusBankService implements IBankService {
 
     @Override
-    public List<String> getAllCurrencies(String backName) {
+    public List<String> getAllCurrencies() {
         return null;
     }
 
     @Override
-    public List<RateDto> getCurrencyRateForPeriod(String bankName, String currencyCode, LocalDate from, LocalDate to) {
+    public List<RateDto> getCurrencyRateForPeriod(String currencyCode, LocalDate from, LocalDate to) {
         return null;
     }
 
     @Override
-    public StatisticsInfo getStatistics(String bankName, String currencyCode, LocalDate from, LocalDate to) {
+    public StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to) {
         return null;
     }
 }
