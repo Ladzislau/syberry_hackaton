@@ -1,5 +1,8 @@
 package com.team.syberry.feign;
 
+import com.team.syberry.domain.nationalbank.CurrencyNationalBank;
+import com.team.syberry.domain.nationalbank.RateNationalBank;
+import com.team.syberry.domain.nationalbank.RateShortNationalBank;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,19 +15,16 @@ import java.util.List;
 public interface INationalBankApiClient {
 
     @GetMapping("/exrates/currencies")
-    List<CurrencyDto> getCurrenciesList();
+    List<CurrencyNationalBank> getCurrenciesList();
 
     @GetMapping("/exrates/rates/{cur_id}")
-    public CurrencyRateDto getCurrencyRate(@PathVariable String currencyCode,
-                                           @RequestParam LocalDate date);
+    RateNationalBank getCurrencyRate(@PathVariable(name = "cur_id") String currencyCode,
+                                            @RequestParam(name = "ondate", required = false) LocalDate date,
+                                            @RequestParam(name = "periodicity") Integer periodicity,
+                                            @RequestParam(name = "parammode", defaultValue = "0") String paramMode);
 
     @GetMapping("/exrates/rates/dynamics/{cur_id}")
-    public List<CurrencyRateDto> getCurrencyRateForPeriod(@PathVariable String currencyCode,
-                                                          @RequestParam LocalDate from,
-                                                          @RequestParam  LocalDate to);
-
-    @GetMapping("/exrates/rates/{cur_id}")
-    public StatisticsDto getStatistics(@PathVariable String currencyCode,
-                                       @RequestParam LocalDate from,
-                                       @RequestParam LocalDate to);
+    List<RateShortNationalBank> getCurrencyRateForPeriod(@PathVariable(name = "cur_id") String currencyCode,
+                                                                @RequestParam(name = "startdate", required = false) LocalDate from,
+                                                                @RequestParam(name = "enddate", required = false) LocalDate to);
 }

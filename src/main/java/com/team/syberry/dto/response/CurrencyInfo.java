@@ -7,4 +7,6 @@ public class CurrencyInfo {
     private String currencyAbbreviation;
 
     private String currencyName;
+
+    private String currencyCode;
 }

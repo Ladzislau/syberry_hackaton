@@ -1,4 +1,4 @@
-package com.team.syberry.domain;
+package com.team.syberry.domain.alfabank;
 
 import lombok.Data;
 
