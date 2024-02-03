@@ -2,7 +2,6 @@ package com.team.syberry.controller;
 
 
 import com.team.syberry.dto.response.RateDto;
-import com.team.syberry.dto.response.StatisticsInfo;
 import com.team.syberry.service.api.IBankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +47,7 @@ public class RateController {
                                            @RequestParam("to") LocalDate to){
         IBankService bankService = bankServiceMap.get(bank);
 
-        StatisticsInfo statisticsInfo = bankService.getStatistics(currencyCode, from, to);
+        byte[] statisticsInfo = bankService.getStatistics(currencyCode, from, to);
         return ResponseEntity.ok(statisticsInfo);
     }
 

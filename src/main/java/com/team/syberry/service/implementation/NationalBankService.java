@@ -8,6 +8,9 @@ import com.team.syberry.dto.response.RateDto;
 import com.team.syberry.dto.response.StatisticsInfo;
 import com.team.syberry.feign.INationalBankApiClient;
 import com.team.syberry.service.api.IBankService;
+import com.team.syberry.util.ChartUtil;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,8 +23,11 @@ import java.util.List;
 public class NationalBankService implements IBankService {
     private INationalBankApiClient bankApiClient;
 
-    public NationalBankService(INationalBankApiClient bankApiClient) {
+    private final ChartUtil chartUtil;
+
+    public NationalBankService(INationalBankApiClient bankApiClient, ChartUtil chartUtil) {
         this.bankApiClient = bankApiClient;
+        this.chartUtil = chartUtil;
     }
 
     @Override
@@ -61,7 +67,13 @@ public class NationalBankService implements IBankService {
     }
 
     @Override
-    public StatisticsInfo getStatistics(String currencyCode, LocalDate from, LocalDate to) {
-        return null;
+    public byte[] getStatistics(String currencyCode, LocalDate from, LocalDate to) {
+        List<RateShortNationalBank> rateList = bankApiClient.getCurrencyRateForPeriod(currencyCode, from, to);
+        DefaultCategoryDataset dataset = chartUtil.createDatasetFromRateShortNationalBankList(rateList, currencyCode);
+        JFreeChart chart = chartUtil.createChart(dataset);
+        byte[] imageBytes = chartUtil.generateChartImage(chart);
+
+        return imageBytes;
     }
+
 }
