@@ -3,7 +3,6 @@ package com.team.syberry.service.implementation;
 import com.team.syberry.domain.nationalbank.*;
 import com.team.syberry.domain.nationalbank.CurrencyNationalBank;
 import com.team.syberry.dto.response.RateDto;
-import com.team.syberry.dto.response.StatisticsInfo;
 import com.team.syberry.feign.INationalBankApiClient;
 import com.team.syberry.service.api.IBankService;
 import com.team.syberry.util.ChartUtil;
@@ -46,7 +45,7 @@ public class NationalBankService implements IBankService {
 
     @Override
     public RateDto getCurrencyRateForDate(String currencyCode, LocalDate date) {
-        RateNationalBank rateNationalBank = bankApiClient.getCurrencyRate(currencyCode, date, 0, "0");
+        RateNationalBank rateNationalBank = bankApiClient.getCurrencyRate(currencyCode, date, 0, "2");
         RateDto dto = new RateDto();
         dto.setDate(LocalDateTime.of(date, LocalTime.now()));
         dto.setBuyRate(rateNationalBank.getCur_OfficialRate());

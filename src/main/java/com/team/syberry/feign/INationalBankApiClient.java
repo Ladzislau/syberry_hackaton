@@ -19,7 +19,7 @@ public interface INationalBankApiClient {
 
     @GetMapping("/exrates/rates/{cur_id}")
     RateNationalBank getCurrencyRate(@PathVariable(name = "cur_id") String currencyCode,
-                                            @RequestParam(name = "ondate", required = false) LocalDate date,
+                                            @RequestParam(name = "ondate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
                                             @RequestParam(name = "periodicity", defaultValue = "0") Integer periodicity,
                                             @RequestParam(name = "parammode", defaultValue = "0") String paramMode);
 
