@@ -32,7 +32,7 @@ public class NationalBankService implements IBankService {
         List<CurrencyNationalBank> currencyNatBankList = bankApiClient.getCurrenciesList();
         List<String> resultList = new ArrayList<>();
         for(CurrencyNationalBank currency : currencyNatBankList) {
-           resultList.add(currency.getCur_Abbreviation());
+           resultList.add(currency.getCurAbbreviation());
         }
         return resultList;
     }
@@ -48,7 +48,7 @@ public class NationalBankService implements IBankService {
         RateNationalBank rateNationalBank = bankApiClient.getCurrencyRate(currencyCode, date, 0, "2");
         RateDto dto = new RateDto();
         dto.setDate(LocalDateTime.of(date, LocalTime.now()));
-        dto.setBuyRate(rateNationalBank.getCur_OfficialRate());
+        dto.setBuyRate(rateNationalBank.getCurOfficialRate());
         dto.setSellRate(null);
         return dto;
     }
@@ -61,7 +61,7 @@ public class NationalBankService implements IBankService {
         for(RateShortNationalBank rateShort : rateNationalBank) {
             RateDto dto = new RateDto();
             dto.setDate(rateShort.getDate());
-            dto.setBuyRate(rateShort.getCur_OfficialRate());
+            dto.setBuyRate(rateShort.getCurOfficialRate());
             dto.setSellRate(null);
 
             resultList.add(dto);

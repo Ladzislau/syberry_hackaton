@@ -26,7 +26,7 @@ public class ChartUtil {
             RateShortNationalBank rate = rateList.get(i);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDateTime date = rate.getDate();
-            dataset.addValue(rate.getCur_OfficialRate(), currencyCode, date.format(formatter));
+            dataset.addValue(rate.getCurOfficialRate(), currencyCode, date.format(formatter));
         }
 
         return dataset;

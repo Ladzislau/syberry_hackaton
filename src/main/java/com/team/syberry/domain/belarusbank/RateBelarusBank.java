@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class RateBelarusBank {
+
     @JsonProperty("kurs_date_time")
     private LocalDateTime kursDateTime;
 

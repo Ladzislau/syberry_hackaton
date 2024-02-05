@@ -11,11 +11,17 @@ public class NationalRatesAlfaBank {
 
     @Data
     public static class Rate {
+
         private double rate;
+
         private String iso;
+
         private int code;
+
         private int quantity;
+
         private LocalDateTime date;
+
         private String name;
     }
 }

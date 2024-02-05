@@ -1,12 +1,19 @@
 package com.team.syberry.domain.nationalbank;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
 public class RateShortNationalBank {
-    private int cur_ID;
+
+    @JsonProperty("Cur_ID")
+    private int curId;
+
+    @JsonProperty("Date")
     private LocalDateTime date;
-    private double cur_OfficialRate;
+
+    @JsonProperty("Сur_OfficialRate")
+    private double curOfficialRate;
 }

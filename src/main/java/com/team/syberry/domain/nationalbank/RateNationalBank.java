@@ -6,13 +6,23 @@ import java.time.LocalDate;
 
 @Data
 public class RateNationalBank {
-    private int Cur_ID;
-    private LocalDate Date;
-    private String Cur_Abbreviation;
-    private int Cur_Scale;
 
-    @JsonProperty(value = "Cur_Name")
+    @JsonProperty("Cur_ID")
+    private int curId;
+
+    @JsonProperty("Date")
+    private LocalDate date;
+
+    @JsonProperty("Cur_Abbreviation")
+    private String curAbbreviation;
+
+    @JsonProperty("Cur_Scale")
+    private int curScale;
+
+    @JsonProperty("Cur_Name")
     private String curName;
-    private double Cur_OfficialRate;
+
+    @JsonProperty("Cur_OfficialRate")
+    private double curOfficialRate;
 }
 
