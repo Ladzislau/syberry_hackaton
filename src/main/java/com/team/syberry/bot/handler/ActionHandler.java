@@ -1,4 +1,4 @@
-package com.team.syberry.bot.Handlers;
+package com.team.syberry.bot.handler;
 
 import com.team.syberry.bot.CurrencyBot;
 import com.team.syberry.dto.response.RateDto;

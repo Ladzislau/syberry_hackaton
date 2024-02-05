@@ -1,4 +1,4 @@
-package com.team.syberry.bot.Handlers;
+package com.team.syberry.bot.handler;
 
 import com.team.syberry.bot.CurrencyBot;
 import org.springframework.stereotype.Component;
@@ -13,21 +13,21 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class StartHandler {
-    public void handle(CurrencyBot bot, Message message) throws TelegramApiException {
-        SendMessage startMessage = new SendMessage();
-        startMessage.setChatId(message.getChatId());
-        startMessage.setText("Привет! Чтобы воспользоваться функциями бота, сперва выбери банк из меню снизу.");
+public class BankConfirmationHandler {
+    public void handle(CurrencyBot bot, Message message, String selectedBank) throws TelegramApiException {
+        SendMessage bankConfirmationMessage = new SendMessage();
+        bankConfirmationMessage.setChatId(message.getChatId());
+        bankConfirmationMessage.setText("Ты выбрал " + selectedBank + ". Теперь выбери нужную тебе валюту из списка ниже:");
 
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
-        Arrays.stream(CurrencyBot.BANKS).forEach(row::add);
+        Arrays.stream(CurrencyBot.CURRENCIES).forEach(row::add);
         keyboard.add(row);
         replyKeyboardMarkup.setKeyboard(keyboard);
 
-        startMessage.setReplyMarkup(replyKeyboardMarkup);
+        bankConfirmationMessage.setReplyMarkup(replyKeyboardMarkup);
 
-        bot.execute(startMessage);
+        bot.execute(bankConfirmationMessage);
     }
 }

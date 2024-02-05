@@ -1,4 +1,4 @@
-package com.team.syberry.bot.Handlers;
+package com.team.syberry.bot.handler;
 
 import com.team.syberry.bot.CurrencyBot;
 import org.springframework.stereotype.Component;

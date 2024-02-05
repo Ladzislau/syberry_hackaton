@@ -1,6 +1,6 @@
 package com.team.syberry.bot;
 
-import com.team.syberry.bot.Handlers.*;
+import com.team.syberry.bot.handler.*;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
